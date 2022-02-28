@@ -42,7 +42,14 @@ replace_shirts = {
     "t-shirt" : "shirt",
     " s ": " small ",
     " l ": " large ",
-    " m ": " medium "}
+    " m ": " medium ", 
+    " 2xl ": " xxl ",
+    " 2x " : " xxl ",
+    " 3xl ": " xxxl ",
+    " 3x " : " xxxl ",
+    " 4xl" : " xxxxl ",
+    " 4x " : " xxxxl "
+    }
 
 
 #replace words 
@@ -81,7 +88,10 @@ def clean(text):
     # remove punctuation 
     #--- I am not going to remove punctuations for now because i might split the sentences. 
     text = re.sub('[%s]' % re.escape(string.punctuation), '', text) 
+    text = re.sub('\d+', '', text)
     return text
+
+
 
 
 # def clean_titles(title):
