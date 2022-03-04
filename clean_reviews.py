@@ -1,6 +1,8 @@
 #packages for data cleaning
 import string
 import re
+import nltk
+nltk.download('words')
 
 replace_short = {"'ll" : " will", "'ve":" have", "'s " : " is ", "'m " : " am ", "'re " : " are ", "'d ": " would "}
 
@@ -91,6 +93,14 @@ def clean(text):
     text = re.sub('\d+', '', text)
     return text
 
+
+
+
+
+def only_english(text):
+    words = set(nltk.corpus.words.words())
+    x = " ".join(w for w in nltk.wordpunct_tokenize(text) if w.lower() in words or not w.isalpha())
+    return x
 
 
 
