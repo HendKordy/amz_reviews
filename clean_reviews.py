@@ -3,6 +3,13 @@ import string
 import re
 import nltk
 nltk.download('words')
+from emot.emo_unicode import UNICODE_EMOJI, UNICODE_EMOJI_ALIAS, EMOTICONS_EMO
+from flashtext import KeywordProcessor
+
+# !pip install demoji
+# !pip install emot
+# !pip install flashtext
+
 
 replace_short = {"'ll" : " will", "'ve":" have", "'s " : " is ", "'m " : " am ", "'re " : " are ", "'d ": " would "}
 
@@ -74,6 +81,9 @@ def clean(text):
     # make it all lowercase 
     text = text.lower()
 
+    #convert emojis to text 
+    text = convert_emoji(text)
+
     #replace words 
     text = replace_words(text)
 
@@ -91,7 +101,7 @@ def clean(text):
     #--- I am not going to remove punctuations for now because i might split the sentences. 
     text = re.sub('[%s]' % re.escape(string.punctuation), '', text) 
     text = re.sub('\d+', '', text)
-    return text
+    return text.strip()
 
 
 
@@ -115,3 +125,18 @@ def only_english(text):
 #     # remove all '\n'
 #     title = re.sub(r"\n", '', title)
 #     return title
+
+
+
+
+#convert emojis into text 
+## formatting
+all_emoji_emoticons = {**EMOTICONS_EMO,**UNICODE_EMOJI_ALIAS, **UNICODE_EMOJI_ALIAS}
+all_emoji_emoticons = {k:v.replace(":","").replace("_"," ").strip() for k,v in all_emoji_emoticons.items()}
+
+kp_all_emoji_emoticons = KeywordProcessor()
+for k,v in all_emoji_emoticons.items():
+    kp_all_emoji_emoticons.add_keyword(k, v)
+
+def convert_emoji(text):
+    return kp_all_emoji_emoticons.replace_keywords(text)
