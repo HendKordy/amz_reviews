@@ -37,7 +37,7 @@ def explain(LIME, review):
         print('True class: %s' % LIME.class_names.get(list(LIME.y_test)[review]))
     else :
         explaination = LIME.explainer.explain_instance(review, LIME.c.predict_proba)
-        print('Probability of review being positive =', LIME.c.predict_proba(review).round(3)[0,1])
+        print('Probability of review being positive =', LIME.c.predict_proba([review]).round(3)[0,1])
     return explaination
 
 def plot_LIME(explaination):
