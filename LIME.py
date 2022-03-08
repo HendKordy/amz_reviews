@@ -22,18 +22,22 @@ def LIME(vect, model, X_test, y_test):
     return LIME
 
 
-def explain(LIME, index):
+def explain(LIME, review):
     # choose a random single prediction
     # idx = 300
     # explain the chosen prediction 
     # use the probability results of the logistic regression
     # can also add num_features parameter to reduce the number of features explained
-    explaination = LIME.explainer.explain_instance(LIME.ls[index], LIME.c.predict_proba)
-    # print results
-    print('Document id: %d' % index)
-    print('review: ', LIME.ls[index])
-    print('Probability of review being positive =', LIME.c.predict_proba([LIME.ls[index]]).round(3)[0,1])
-    print('True class: %s' % LIME.class_names.get(list(LIME.y_test)[index]))
+    if type(review) is int: 
+        explaination = LIME.explainer.explain_instance(LIME.ls[review], LIME.c.predict_proba)
+        # print results
+        print('Document id: %d' % review)
+        print('review: ', LIME.ls[review])
+        print('Probability of review being positive =', LIME.c.predict_proba([LIME.ls[review]]).round(3)[0,1])
+        print('True class: %s' % LIME.class_names.get(list(LIME.y_test)[review]))
+    else :
+        explaination = LIME.explainer.explain_instance(review, LIME.c.predict_proba)
+        print('Probability of review being positive =', LIME.c.predict_proba(review).round(3)[0,1])
     return explaination
 
 def plot_LIME(explaination):
