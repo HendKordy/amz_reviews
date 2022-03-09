@@ -12,7 +12,7 @@ NLP Analysis on Amazon Reviews to Predict if the Customer Liked the Product or N
 ## Introduction 
 
 
-The goal of this project is to use NLP to build a model that predict if the customer likes the product or not based on their written review, and find the reason why they gave this rating. I want to use NLP to reveal key cunsomer insights and track sentiment that could help businesses understand their products better.
+The goal of this project is to use NLP to build a model that predict if the customer likes the product or not based on their written review, and find the reason why they gave this rating. I want to use NLP to reveal key consumer insights and track sentiment that could help businesses understand their products better.
 
 
 ## Data
